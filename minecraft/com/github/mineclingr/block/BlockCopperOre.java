@@ -7,9 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class BlockCropperOre extends Block {
+public class BlockCopperOre extends Block {
 
-	public BlockCropperOre(int par1) {
+	public BlockCopperOre(int par1) {
 		super(par1, Material.rock);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}

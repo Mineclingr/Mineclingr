@@ -12,11 +12,11 @@ public class BlockCore extends Block {
 		super(par1, par2Material);
 	}
 
-	public static final Block oreCropper = new BlockCropperOre(500).setHardness(3.0F).setResistance(5.0F)
-	.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("mineclingr:oreCropper");
+	public static final Block oreCopper = new BlockCopperOre(500).setHardness(3.0F).setResistance(5.0F)
+	.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("mineclingr:oreCopper");
 
 	public static void InitBlocks() {
-		GameRegistry.registerBlock(oreCropper, "mineclingr:oreCropper");
-		LanguageRegistry.addName(oreCropper, "Cropper Ore");
+		GameRegistry.registerBlock(oreCopper, "mineclingr:oreCopper");
+		LanguageRegistry.addName(oreCopper, "Copper Ore");
 	}
 }
