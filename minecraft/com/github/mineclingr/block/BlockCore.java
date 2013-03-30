@@ -1,5 +1,8 @@
 package com.github.mineclingr.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
@@ -7,6 +10,7 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.block.BlockOreStorage;
 import net.minecraft.block.BlockPressurePlateWeighted;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 
 public class BlockCore extends Block {
 	
@@ -14,6 +18,8 @@ public class BlockCore extends Block {
 			.setHardness(3.0F).setResistance(5.0F).setStepSound(soundStoneFootstep);
 	public static final Block blockCopper = new BlockOreStorage(501).setUnlocalizedName("mineclingr:blockCopper")
 			.setHardness(5.0F).setResistance(10.0F).setStepSound(soundMetalFootstep);
+	public static final Block scaffold = new BlockScaffold(502).setUnlocalizedName("mineclingr:scaffold")
+			.setHardness(0.4F).setStepSound(soundLadderFootstep);
 	
 	
 	public BlockCore(int par1, Material par2Material) {
@@ -25,5 +31,9 @@ public class BlockCore extends Block {
 		LanguageRegistry.addName(oreCopper, "Copper Ore");
 		GameRegistry.registerBlock(blockCopper, "mineclingr:blockCopper");
 		LanguageRegistry.addName(blockCopper, "Copper Block");
+		GameRegistry.registerBlock(scaffold, "mineclingr:scaffold");
+		for(int i=0;i<4;++i) {
+			LanguageRegistry.addName(new ItemStack(scaffold,1,i), "Scaffold");
+		}
 	}
 }
