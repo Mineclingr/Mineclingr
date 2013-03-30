@@ -3,6 +3,7 @@ package com.github.mineclingr;
 import com.github.mineclingr.block.BlockCore;
 import com.github.mineclingr.item.ItemCore;
 import com.github.mineclingr.item.crafting.FurnaceRecipesCore;
+import com.github.mineclingr.item.crafting.RecipesCore;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -36,8 +37,7 @@ public class Mineclingr {
             proxy.registerRenderers();
             BlockCore.InitBlocks();
             ItemCore.InitItems();
-            FurnaceRecipesCore.InitRecipes();
-            FurnaceRecipesCore.InitSmelting();
+            RecipesCore.InitRecipes();
     }
 
     @PostInit

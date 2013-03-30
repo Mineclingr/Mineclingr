@@ -9,10 +9,6 @@ import com.github.mineclingr.item.ItemCore;
 
 public class FurnaceRecipesCore {
 	
-	public static void InitRecipes() {
-		//Nothing
-	}
-	
 	public static void InitSmelting() {
 		FurnaceRecipes.smelting().addSmelting(BlockCore.oreCopper.blockID, new ItemStack(ItemCore.ingotCopper),0.7f);
 	}
