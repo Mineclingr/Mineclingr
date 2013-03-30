@@ -1,6 +1,8 @@
 package com.github.mineclingr;
 
 import com.github.mineclingr.block.BlockCore;
+import com.github.mineclingr.item.ItemCore;
+import com.github.mineclingr.item.crafting.FurnaceRecipesCore;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -13,7 +15,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid="Mineclingr", name="Mineclingr", version="alpha 0.0.1")
+@Mod(modid="Mineclingr", name="Mineclingr", version="alpha 0.0.2")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true)
 
 public class Mineclingr {
@@ -33,6 +35,9 @@ public class Mineclingr {
     public void Init(FMLInitializationEvent event) {
             proxy.registerRenderers();
             BlockCore.InitBlocks();
+            ItemCore.InitItems();
+            FurnaceRecipesCore.InitRecipes();
+            FurnaceRecipesCore.InitSmelting();
     }
 
     @PostInit
