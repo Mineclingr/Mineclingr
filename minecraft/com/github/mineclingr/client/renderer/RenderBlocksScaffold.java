@@ -18,7 +18,6 @@ public class RenderBlocksScaffold {
 	public static boolean renderBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		if(modelId == 300) {
 			Tessellator tessellator = Tessellator.instance;
-			Icon icon;
 			
 			double xd = (double)x;
 			double yd = (double)y;
@@ -34,16 +33,15 @@ public class RenderBlocksScaffold {
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
 			
 			for(int i=0;i<16;++i) {
-				icon = renderer.getBlockIconFromSideAndMetadata(block, i, world.getBlockMetadata(x, y, z));
-				if (icon == null) {
-					break;
-				}
-			
+
+				Icon icon = renderer.getBlockIconFromSideAndMetadata(block, i, world.getBlockMetadata(x, y, z));
 				
 		        double texSU = (double)icon.getMinU();
 		        double texSV = (double)icon.getMinV();
 		        double texXU = (double)icon.getMaxU();
 		        double texXV = (double)icon.getMaxV();
+		        
+		        tessellator.disableColor();
 		        
 				switch(i) {
 				case 0:
@@ -51,51 +49,74 @@ public class RenderBlocksScaffold {
 		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
 		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
 		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
-//				case 1:
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
-//				case 2:
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
-//				case 3:
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
-//				case 4:
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
-//				case 5:
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
-//				case 6:
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
-//				case 7:
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
-//		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
-//		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
-				case 12:
-		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
-		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texSU, texXV);
-		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texXV);
+				case 1:
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
 		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
+				case 2:
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
+				case 3:
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
+		            
+				case 4:
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
+				case 5:
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
+				case 6:
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
+				case 7:
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
+		            
+				case 8:
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
+				case 9:
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
+				case 10:
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
+				case 11:
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 0.0D, zd + 0.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 0.0D, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texXU, texSV);
+					
+				case 12:
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 0.0D, texSU, texSV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D, zd + 1.0D, texSU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D, zd + 0.0D, texXU, texSV);
 				case 13:
-		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D - thick, zd + 1.0D, texSU, texSV);
-		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D - thick, zd + 1.0D, texSU, texXV);
-		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D - thick, zd + 0.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D - thick, zd + 0.0D, texSU, texSV);
 		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D - thick, zd + 0.0D, texXU, texSV);
+		            tessellator.addVertexWithUV(xd + 1.0D, yd + 1.0D - thick, zd + 1.0D, texXU, texXV);
+		            tessellator.addVertexWithUV(xd + 0.0D, yd + 1.0D - thick, zd + 1.0D, texSU, texXV);
 				}
 				icon = null;
 			}

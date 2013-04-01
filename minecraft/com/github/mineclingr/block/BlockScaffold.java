@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemMultiTextureTile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -17,16 +18,20 @@ import net.minecraft.world.World;
 public class BlockScaffold extends BlockCore {
 	
 	public static final String[] iconTypes = new String[] {"mineclingr:scaffold0", "mineclingr:scaffold2", "mineclingr:scaffold4"};
+	public static final String[] woodType = new String[] {"wood", "wood_spruce", "wood_birch", "wood_jungle"};
 	
     @SideOnly(Side.CLIENT)
     private Icon[][] iconRenderArray;
     
+    @SideOnly(Side.CLIENT)
+    private Icon[] iconWood;
+    
 	public BlockScaffold(int par1) {
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
 		if (par1 < 12) {
@@ -39,8 +44,22 @@ public class BlockScaffold extends BlockCore {
 				return iconRenderArray[lv][2];
 			}
 		} else {
-			return BlockCore.wood.getBlockTextureFromSideAndMetadata(0, par2 / 4);
+			return iconWood[par2 >> 2];
 		}
+    }
+	
+	
+	@Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack)
+    {
+    	world.setBlockMetadataWithNotify(x, y, z, itemStack.getItemDamage(), 2);
+    	for(int i=0;i<4;++i) {
+	    	int xi = (i & 1) == 1 ? x : x + ((i & 2) == 2 ? 1 : -1);
+	    	int zi = (i & 1) == 1 ? z + ((i & 2) == 2 ? 1 : -1) : z;
+	    	if(world.isAirBlock(xi, y, zi)) {
+	    		world.setBlock(xi, y, zi, BlockCore.scaffoldSide.blockID);
+	    	}
+    	}
     }
 	
 	@Override
@@ -62,18 +81,6 @@ public class BlockScaffold extends BlockCore {
     public int damageDropped(int par1)
     {
         return par1;
-    }
-    
-    @Override
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
-    	for(int i=0;i<4;++i) {
-	    	int xi = (i & 1) == 1 ? x : x + ((i & 2) == 2 ? 1 : -1);
-	    	int zi = (i & 1) == 1 ? z + ((i & 2) == 2 ? 1 : -1) : z;
-	    	if(world.isAirBlock(xi, y, zi)) {
-	    		world.setBlock(xi, y, zi, BlockCore.scaffoldSide.blockID);
-	    	}
-    	}
     }
     
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
@@ -98,6 +105,7 @@ public class BlockScaffold extends BlockCore {
     }
     
     
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
@@ -107,11 +115,14 @@ public class BlockScaffold extends BlockCore {
         {
             iconArray[i] = par1IconRegister.registerIcon(iconTypes[i]);
         }
-        iconRenderArray = new Icon[][]{{iconArray[0],null,iconArray[1]},{iconArray[1],iconArray[1],null},{iconArray[2],iconArray[2],null},{iconArray[2],iconArray[2],iconArray[2]}};
-    }
-    
-    public int getLv(World world, int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z) % 4;
-    }
+        iconRenderArray = new Icon[][]{{iconArray[0],iconArray[0],iconArray[1]},{iconArray[1],iconArray[1],iconArray[0]},{iconArray[2],iconArray[2],iconArray[0]},{iconArray[2],iconArray[2],iconArray[2]}};
 
+        iconWood = new Icon[woodType.length];
+
+        for (int i = 0; i < woodType.length; ++i)
+        {
+            iconWood[i] = par1IconRegister.registerIcon(woodType[i]);
+        }
+
+    }
 }

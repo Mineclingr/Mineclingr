@@ -36,8 +36,8 @@ public class BlockCore extends Block {
 		LanguageRegistry.addName(oreCopper, "Copper Ore");
 		GameRegistry.registerBlock(blockCopper, "mineclingr:blockCopper");
 		LanguageRegistry.addName(blockCopper, "Copper Block");
+		GameRegistry.registerBlock(scaffold, "mineclingr:scaffold");
 		for(int i = 0;i < (BlockWood.woodType.length * 4);++i) {
-			GameRegistry.registerBlock(scaffold, "mineclingr:scaffold");
 			LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,i),
 					String.format("%s Scaffold Lv%d",
 							Mineclingr.LargerHelper(BlockWood.woodType[i >> 2]),
