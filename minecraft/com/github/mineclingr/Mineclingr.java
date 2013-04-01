@@ -44,4 +44,9 @@ public class Mineclingr {
     public void postInit(FMLPostInitializationEvent event) {
             // Stub Method
     }
+    
+    public static String LargerHelper(String name) {
+    	String n = new String(name);
+    	return n.substring(0,1).toUpperCase() + n.substring(1).toLowerCase();
+    }
 }
