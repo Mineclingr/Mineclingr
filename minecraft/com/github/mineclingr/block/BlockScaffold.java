@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMultiTextureTile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -48,18 +49,11 @@ public class BlockScaffold extends BlockCore {
 		}
     }
 	
-	
 	@Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityLiving, ItemStack itemStack)
     {
     	world.setBlockMetadataWithNotify(x, y, z, itemStack.getItemDamage(), 2);
-    	for(int i=0;i<4;++i) {
-	    	int xi = (i & 1) == 1 ? x : x + ((i & 2) == 2 ? 1 : -1);
-	    	int zi = (i & 1) == 1 ? z + ((i & 2) == 2 ? 1 : -1) : z;
-	    	if(world.isAirBlock(xi, y, zi)) {
-	    		world.setBlock(xi, y, zi, BlockCore.scaffoldSide.blockID);
-	    	}
-    	}
+    	onNeighborBlockChange(world, x, y, z, 0);
     }
 	
 	@Override
@@ -70,6 +64,33 @@ public class BlockScaffold extends BlockCore {
 			par3List.add(new ItemStack(par1, 1, i));
 		}
     }
+	
+//osiage
+//	public boolean placeUpperBlock(World world, int x, int y, int z, int metadeta) {
+//		if(world.getBlockId(x, y, z) == this.blockID) {
+//			return placeUpperBlock(world, x, y + 1, z, metadeta);
+//		} else if (world.isAirBlock(x, y, z)) {
+//			world.setBlock(x, y, z, this.blockID, metadeta, 3);
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+//	
+//	@Override
+//    public boolean onBlockActivated(World world, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+//    {
+//        if(world.getBlockId(par2, par3, par4) == this.blockID) {
+//        	if(par6 > 1) {
+//        		if(par8 > 0.9375F) {
+//        			if(this.placeUpperBlock(world, par2, par3, par4, par6)) {
+//        				return true;
+//        			}
+//        		}
+//        	}
+//        }
+//        return false;
+//    }
 	
     @Override
     public boolean isLadder(World world, int x, int y, int z)
@@ -83,9 +104,15 @@ public class BlockScaffold extends BlockCore {
         return par1;
     }
     
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    public void onNeighborBlockChange(World world, int x, int y, int z, int par5)
     {
-    	this.onBlockAdded(par1World, par2, par3, par4);
+    	for(int i=0;i<4;++i) {
+	    	int xi = (i & 1) == 1 ? x : x + ((i & 2) == 2 ? 1 : -1);
+	    	int zi = (i & 1) == 1 ? z + ((i & 2) == 2 ? 1 : -1) : z;
+	    	if(world.isAirBlock(xi, y, zi)) {
+	    		world.setBlock(xi, y, zi, BlockCore.scaffoldSide.blockID);
+	    	}
+    	}
     }
     
     @Override
@@ -123,6 +150,5 @@ public class BlockScaffold extends BlockCore {
         {
             iconWood[i] = par1IconRegister.registerIcon(woodType[i]);
         }
-
     }
 }

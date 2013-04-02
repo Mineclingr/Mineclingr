@@ -50,7 +50,7 @@ public class BlockScaffoldSide extends BlockCore {
     @Override
     public int getRenderType()
     {
-        return -1;
+        return 0;
     }
     
     public boolean isOpaqueCube()

@@ -37,13 +37,23 @@ public class BlockCore extends Block {
 		GameRegistry.registerBlock(blockCopper, "mineclingr:blockCopper");
 		LanguageRegistry.addName(blockCopper, "Copper Block");
 		GameRegistry.registerBlock(scaffold, "mineclingr:scaffold");
-		for(int i = 0;i < (BlockWood.woodType.length * 4);++i) {
-			LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,i),
-					String.format("%s Scaffold Lv%d",
-							Mineclingr.LargerHelper(BlockWood.woodType[i >> 2]),
-							(i % 4) + 1)
-					);
-		}
-		GameRegistry.registerBlock(scaffoldSide, "Scaffold Side");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Oka Scaffold Lv1");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Oka Scaffold Lv2");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Oka Scaffold Lv3");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Oka Scaffold Lv4");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Sqruce Scaffold Lv1");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Sqruce Scaffold Lv2");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Sqruce Scaffold Lv3");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Sqruce Scaffold Lv4");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Birch Scaffold Lv1");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Birch Scaffold Lv2");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Birch Scaffold Lv3");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Birch Scaffold Lv4");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Jungle Scaffold Lv1");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Jungle Scaffold Lv2");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Jungle Scaffold Lv3");
+		LanguageRegistry.addName(new ItemStack(scaffold.blockID,1,0),"Jungle Scaffold Lv4");
+		GameRegistry.registerBlock(scaffoldSide, "mineclingr:scaffoldside");
+		LanguageRegistry.addName(scaffoldSide, "Scaffold Side");
 	}
 }
